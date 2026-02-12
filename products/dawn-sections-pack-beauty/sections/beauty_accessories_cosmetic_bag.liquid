@@ -1,0 +1,217 @@
+{% comment %}
+  Section: Beauty Accessories Cosmetic Bag
+  Description: Luxury cosmetic bag showcase with gradient background and product carousel.
+{% endcomment %}
+<div class="dawn-cosmetic-bag-section" data-section-id="{{ section.id }}">
+  <div class="cosmetic-bag-hero" style="background: linear-gradient(135deg, {{ section.settings.bg_color_start }}, {{ section.settings.bg_color_end }});">
+    <div class="cosmetic-bag-content">
+      {% if section.settings.show_icon %}
+        <div class="cosmetic-bag-icon">{% render 'dawn-icon-cosmetic-bag' %}</div>
+      {% endif %}
+      <h2 class="cosmetic-bag-title">{{ section.settings.title }}</h2>
+      <p class="cosmetic-bag-tagline">{{ section.settings.tagline }}</p>
+      
+      <div class="cosmetic-bag-grid">
+        {% for product in section.settings.products %}
+          <div class="cosmetic-bag-item" style="background: {{ product.color }};">
+            <img src="{{ product.image | img_url: '400x400' }}" alt="{{ product.name }}" class="cosmetic-bag-image">
+            <h3 class="cosmetic-bag-name">{{ product.name }}</h3>
+            <p class="cosmetic-bag-description">{{ product.description }}</p>
+          </div>
+        {% endfor %}
+      </div>
+      
+      <p class="cosmetic-bag-description-text">{{ section.settings.description }}</p>
+      <a href="{{ section.settings.cta_link }}" class="dawn-button dawn-button-gold">{{ section.settings.cta_text }}</a>
+    </div>
+  </div>
+</div>
+
+<style>
+.dawn-cosmetic-bag-section {
+  position: relative;
+  overflow: hidden;
+}
+.cosmetic-bag-hero {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+}
+.cosmetic-bag-content {
+  max-width: 800px;
+  text-align: center;
+  color: {{ section.settings.text_color }};
+}
+.cosmetic-bag-icon {
+  margin-bottom: 1.5rem;
+}
+.cosmetic-bag-icon svg {
+  width: 48px;
+  height: 48px;
+  stroke: #D4AF37;
+}
+.cosmetic-bag-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: {{ section.settings.title_color }};
+}
+.cosmetic-bag-tagline {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+}
+.cosmetic-bag-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
+}
+.cosmetic-bag-item {
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+}
+.cosmetic-bag-item:hover {
+  transform: translateY(-5px);
+}
+.cosmetic-bag-image {
+  width: 100%;
+  height: 150px;
+  object-fit: contain;
+  margin-bottom: 0.5rem;
+}
+.cosmetic-bag-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+.cosmetic-bag-description {
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+.cosmetic-bag-description-text {
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: 2rem 0;
+  opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+  .cosmetic-bag-title { font-size: 2rem; }
+  .cosmetic-bag-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Cosmetic Bag Collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Velvet Cosmetic Bags"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "Timeless Elegance"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Discover our signature cosmetic bag collection, blending luxury with functionality. Each bag is crafted for effortless organization and sophisticated style."
+    },
+    {
+      "type": "color",
+      "id": "bg_color_start",
+      "label": "Background Gradient Start",
+      "default": "#1A1A3A"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_end",
+      "label": "Background Gradient End",
+      "default": "#2A2A5A"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#F9F9F9"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#E8E0D8"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_icon",
+      "label": "Show cosmetic bag icon",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA Link"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "array",
+      "id": "products",
+      "label": "Cosmetic Bags",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "text",
+            "label": "Bag Name"
+          },
+          "description": {
+            "type": "text",
+            "label": "Description"
+          },
+          "color": {
+            "type": "color",
+            "label": "Color"
+          },
+          "image": {
+            "type": "image_picker",
+            "label": "Bag Image"
+          }
+        },
+        "min_items": 2,
+        "max_items": 6
+      },
+      "default": [
+        {
+          "name": "Velvet Pouch",
+          "description": "Compact and elegant.",
+          "color": "#D4AF37",
+          "image": ""
+        },
+        {
+          "name": "Midnight Bag",
+          "description": "Spacious and mysterious.",
+          "color": "#8B4A6B",
+          "image": ""
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

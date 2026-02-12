@@ -1,0 +1,232 @@
+{% comment %}
+  Section: Beauty Makeup Eyeshadow
+  Description: Luxury eyeshadow palette with gradient background and product showcase.
+{% endcomment %}
+<div class="dawn-eyeshadow-section" data-section-id="{{ section.id }}">
+  <div class="eyeshadow-hero" style="background: linear-gradient(135deg, {{ section.settings.bg_color_start }}, {{ section.settings.bg_color_end }});">
+    <div class="eyeshadow-content">
+      {% if section.settings.show_icon %}
+        <div class="eyeshadow-icon">{% render 'dawn-icon-eyeshadow' %}</div>
+      {% endif %}
+      <h2 class="eyeshadow-title">{{ section.settings.title }}</h2>
+      <p class="eyeshadow-tagline">{{ section.settings.tagline }}</p>
+      
+      <div class="eyeshadow-palette">
+        {% for palette in section.settings.palettes %}
+          <div class="eyeshadow-palette-item" style="background: {{ palette.color }};">
+            <img src="{{ palette.image | img_url: '400x400' }}" alt="{{ palette.name }}" class="eyeshadow-image">
+            <h3 class="eyeshadow-palette-name">{{ palette.name }}</h3>
+            <p class="eyeshadow-palette-description">{{ palette.description }}</p>
+          </div>
+        {% endfor %}
+      </div>
+      
+      <p class="eyeshadow-description">{{ section.settings.description }}</p>
+      <a href="{{ section.settings.cta_link }}" class="dawn-button dawn-button-gold">{{ section.settings.cta_text }}</a>
+    </div>
+  </div>
+</div>
+
+<style>
+.dawn-eyeshadow-section {
+  position: relative;
+  overflow: hidden;
+}
+.eyeshadow-hero {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+}
+.eyeshadow-content {
+  max-width: 800px;
+  text-align: center;
+  color: {{ section.settings.text_color }};
+}
+.eyeshadow-icon {
+  margin-bottom: 1.5rem;
+}
+.eyeshadow-icon svg {
+  width: 48px;
+  height: 48px;
+  stroke: #D4AF37;
+}
+.eyeshadow-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: {{ section.settings.title_color }};
+}
+.eyeshadow-tagline {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+}
+.eyeshadow-palette {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 2rem 0;
+  flex-wrap: wrap;
+}
+.eyeshadow-palette-item {
+  width: 120px;
+  height: 200px;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+}
+.eyeshadow-palette-item:hover {
+  transform: translateY(-5px);
+}
+.eyeshadow-image {
+  width: 100%;
+  height: 100px;
+  object-fit: contain;
+  margin-bottom: 0.5rem;
+}
+.eyeshadow-palette-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+.eyeshadow-palette-description {
+  font-size: 0.7rem;
+  opacity: 0.8;
+}
+.eyeshadow-description {
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: 2rem 0;
+  opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+  .eyeshadow-title { font-size: 2rem; }
+  .eyeshadow-palette { gap: 1rem; }
+  .eyeshadow-palette-item { width: 100px; height: 160px; }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Eyeshadow Palettes",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Velvet Eyeshadow Palettes"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "Timeless Elegance"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Discover our signature eyeshadow palettes, blending luxury with timeless beauty. Each palette is crafted for all-day wear and effortless glamour."
+    },
+    {
+      "type": "color",
+      "id": "bg_color_start",
+      "label": "Background Gradient Start",
+      "default": "#1A1A3A"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_end",
+      "label": "Background Gradient End",
+      "default": "#2A2A5A"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#F9F9F9"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#E8E0D8"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_icon",
+      "label": "Show eyeshadow icon",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA Link"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Image"
+    },
+    {
+      "type": "array",
+      "id": "palettes",
+      "label": "Eyeshadow Palettes",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "text",
+            "label": "Palette Name"
+          },
+          "color": {
+            "type": "color",
+            "label": "Color"
+          },
+          "description": {
+            "type": "text",
+            "label": "Description"
+          },
+          "image": {
+            "type": "image_picker",
+            "label": "Palette Image"
+          }
+        },
+        "min_items": 3,
+        "max_items": 6
+      },
+      "default": [
+        {
+          "name": "Velvet Velvet",
+          "color": "#D4AF37",
+          "description": "Classic neutral palette",
+          "image": ""
+        },
+        {
+          "name": "Midnight Rose",
+          "color": "#8B4A6B",
+          "description": "Deep, dramatic shades",
+          "image": ""
+        },
+        {
+          "name": "Sunset Blush",
+          "color": "#FF8A65",
+          "description": "Warm, glowing tones",
+          "image": ""
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
