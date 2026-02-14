@@ -1,26 +1,38 @@
 {% comment %}
-  Section: $name
+  Section: Example Section
 {% endcomment %}
 
-<div class="$name-section" data-section-id="{{ section.id }}">
+<div class="example-section" data-section-id="{{ section.id }}">
   {% for block in section.blocks %}
-    <div class="item" style="background: {{ block.settings.color }};">
+    <div class="item" style="background: {{ block.settings.color }};" {{ block.shopify_attributes }}>
       {% if block.settings.image != blank %}
-        <img src="{{ block.settings.image | img_url: '300x300' }}" alt="{{ block.settings.title }}" class="item-image">
+        <img
+          src="{{ block.settings.image | image_url: width: 300 }}"
+          alt="{{ block.settings.title | escape }}"
+          class="item-image"
+          loading="lazy"
+        >
       {% endif %}
-      <h3 class="item-title">{{ block.settings.title }}</h3>
-      <p class="item-text">{{ block.settings.text }}</p>
+
+      {% if block.settings.title != blank %}
+        <h3 class="item-title">{{ block.settings.title }}</h3>
+      {% endif %}
+
+      {% if block.settings.text != blank %}
+        <p class="item-text">{{ block.settings.text }}</p>
+      {% endif %}
     </div>
   {% endfor %}
 </div>
 
 <style>
+  .example-section { padding: 2rem; }
   .item { padding: 1rem; margin: .5rem; border-radius: .5rem; }
 </style>
 
 {% schema %}
 {
-  "name": "$name",
+  "name": "Example Section",
   "settings": [],
   "blocks": [
     {
@@ -34,13 +46,14 @@
       ]
     }
   ],
+  "max_blocks": 8,
   "presets": [
     {
-      "name": "Default $name",
-      "category": "Featured",
+      "name": "Example Section",
+      "category": "Beauty",
       "blocks": [
-        { "type": "item", "settings": { "title": "Item 1", "text": "Description", "color": "#FFF", "image": "" } },
-        { "type": "item", "settings": { "title": "Item 2", "text": "Description", "color": "#FFF", "image": "" } }
+        { "type": "item" },
+        { "type": "item" }
       ]
     }
   ]
