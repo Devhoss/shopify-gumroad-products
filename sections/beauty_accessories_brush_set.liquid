@@ -1,38 +1,34 @@
 {% comment %}
-  Section: Example Section
+  Section: $name
 {% endcomment %}
 
-<div class="example-section" data-section-id="{{ section.id }}">
+<div class="$name-section" data-section-id="{{ section.id }}">
   {% for block in section.blocks %}
-    <div class="item" style="background: {{ block.settings.color }};" {{ block.shopify_attributes }}>
+    <div class="item" style="background: {{ block.settings.color }};">
       {% if block.settings.image != blank %}
-        <img
-          src="{{ block.settings.image | image_url: width: 300 }}"
-          alt="{{ block.settings.title | escape }}"
-          class="item-image"
-          loading="lazy"
-        >
+        <img src="{{
+    block.settings.image
+    | image_url: width: 300
+    | image_tag: 
+      widths: '150, 300, 450',
+      sizes: '(max-width: 768px) 150px, 300px',
+      alt: block.settings.title,
+      loading: 'lazy'
+  }}" alt="{{ block.settings.title }}" class="item-image">
       {% endif %}
-
-      {% if block.settings.title != blank %}
-        <h3 class="item-title">{{ block.settings.title }}</h3>
-      {% endif %}
-
-      {% if block.settings.text != blank %}
-        <p class="item-text">{{ block.settings.text }}</p>
-      {% endif %}
+      <h3 class="item-title">{{ block.settings.title }}</h3>
+      <p class="item-text">{{ block.settings.text }}</p>
     </div>
   {% endfor %}
 </div>
 
 <style>
-  .example-section { padding: 2rem; }
   .item { padding: 1rem; margin: .5rem; border-radius: .5rem; }
 </style>
 
 {% schema %}
 {
-  "name": "Example Section",
+  "name": "$name",
   "settings": [],
   "blocks": [
     {
@@ -46,14 +42,13 @@
       ]
     }
   ],
-  "max_blocks": 8,
   "presets": [
     {
-      "name": "Example Section",
-      "category": "Beauty",
+      "name": "Default $name",
+      "category": "Featured",
       "blocks": [
-        { "type": "item" },
-        { "type": "item" }
+        { "type": "item", "settings": { "title": "Item 1", "text": "Description", "color": "#FFF", "image": "" } },
+        { "type": "item", "settings": { "title": "Item 2", "text": "Description", "color": "#FFF", "image": "" } }
       ]
     }
   ]
