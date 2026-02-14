@@ -1,0 +1,15 @@
+{
+  "name": "Home",
+  "settings": [],
+  "sections": {
+    "hero": {
+      "type": "beauty_accessories",
+      "settings": {}
+    },
+    "featured": {
+      "type": "featured-products",
+      "settings": {}
+    }
+  },
+  "order": ["hero", "featured"]
+}
