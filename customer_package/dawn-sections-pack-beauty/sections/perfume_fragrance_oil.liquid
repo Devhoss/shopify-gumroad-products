@@ -1,0 +1,48 @@
+{% comment %}
+  Section: Perfume Fragrance Oil
+  Description: Hero section for a perfume product with large background image, title, tagline, and call‑to‑action button.
+{% endcomment %}
+<div class="dawn-fragrance-section">
+  <div class="hero-image" style="background-image: url('{{ section.settings.hero_image | img_url: '2048x2048' }}');"></div>
+  <div class="hero-content">
+    <h1 class="hero-title">{{ section.settings.title }}</h1>
+    <p class="hero-tagline">{{ section.settings.tagline }}</p>
+    <a href="{{ section.settings.cta_link }}" class="btn-primary">{{ section.settings.cta_text }}</a>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Perfume Fragrance Oil Hero",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero background image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Silk Velvet – Eau de Parfum"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "A luxurious scent that lingers"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA button link",
+      "default": "/products/silk-velvet"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA button text",
+      "default": "Shop Now"
+    }
+  ]
+}
+{% endschema %}
