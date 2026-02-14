@@ -1,1 +1,48 @@
-}/beauty skincare serum}
+{% comment %}
+  Section: $name
+{% endcomment %}
+
+<div class="$name-section" data-section-id="{{ section.id }}">
+  {% for block in section.blocks %}
+    <div class="item" style="background: {{ block.settings.color }};">
+      {% if block.settings.image != blank %}
+        <img src="{{ block.settings.image | img_url: '300x300' }}" alt="{{ block.settings.title }}" class="item-image">
+      {% endif %}
+      <h3 class="item-title">{{ block.settings.title }}</h3>
+      <p class="item-text">{{ block.settings.text }}</p>
+    </div>
+  {% endfor %}
+</div>
+
+<style>
+  .item { padding: 1rem; margin: .5rem; border-radius: .5rem; }
+</style>
+
+{% schema %}
+{
+  "name": "$name",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Item Title" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Description" },
+        { "type": "color", "id": "color", "label": "Background Color", "default": "#FFFFFF" },
+        { "type": "image_picker", "id": "image", "label": "Image" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default $name",
+      "category": "Featured",
+      "blocks": [
+        { "type": "item", "settings": { "title": "Item 1", "text": "Description", "color": "#FFF", "image": "" } },
+        { "type": "item", "settings": { "title": "Item 2", "text": "Description", "color": "#FFF", "image": "" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,145 +1,46 @@
 {% comment %}
-  Section: Beauty Education
-  Description: Educational hero with background image, title, tagline, and CTA.
+  Section: $name
 {% endcomment %}
 
-<div class="dawn-education-section" data-section-id="{{ section.id }}">
-  <div class="education-hero" style="background: linear-gradient(135deg, {{ section.settings.bg_color_start }}, {{ section.settings.bg_color_end }});">
-    <div class="education-content">
-      {% if section.settings.show_icon %}
-        <div class="education-icon">{% render 'dawn-icon-education' %}</div>
+<div class="$name-section" data-section-id="{{ section.id }}">
+  {% for block in section.blocks %}
+    <div class="item" style="background: {{ block.settings.color }};">
+      {% if block.settings.image != blank %}
+        <img src="{{ block.settings.image | img_url: '300x300' }}" alt="{{ block.settings.title }}" class="item-image">
       {% endif %}
-      <h2 class="education-title">{{ section.settings.title }}</h2>
-      <p class="education-tagline">{{ section.settings.tagline }}</p>
-
-      <div class="education-modules">
-        {% for block in section.blocks %}
-          <div class="module-item" style="background: {{ block.settings.color }};">
-            {% if block.settings.image != blank %}
-              <img src="{{ block.settings.image | img_url: '300x300' }}" alt="{{ block.settings.name }}" class="module-image">
-            {% endif %}
-            <h3 class="module-name">{{ block.settings.name }}</h3>
-            <p class="module-description">{{ block.settings.description }}</p>
-          </div>
-        {% endfor %}
-      </div>
-
-      <p class="education-description">{{ section.settings.description }}</p>
-      <a href="{{ section.settings.cta_link }}" class="dawn-button dawn-button-gold">{{ section.settings.cta_text }}</a>
+      <h3 class="item-title">{{ block.settings.title }}</h3>
+      <p class="item-text">{{ block.settings.text }}</p>
     </div>
-  </div>
+  {% endfor %}
 </div>
 
 <style>
-.dawn-education-section {
-  position: relative;
-  overflow: hidden;
-}
-.education-hero {
-  min-height: 70vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 4rem 2rem;
-}
-.education-content {
-  max-width: 900px;
-  text-align: center;
-  color: {{ section.settings.text_color }};
-}
-.education-icon {
-  margin-bottom: 1.5rem;
-}
-.education-icon svg {
-  width: 48px;
-  height: 48px;
-  stroke: #D4AF37;
-}
-.education-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  color: {{ section.settings.title_color }};
-}
-.education-tagline {
-  font-size: 1.25rem;
-  margin-bottom: 2rem;
-  font-weight: 300;
-  letter-spacing: 0.05em;
-}
-.education-modules {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  margin: 2rem 0;
-  flex-wrap: wrap;
-}
-.module-item {
-  width: 100px;
-  height: 160px;
-  border-radius: 12px;
-  padding: 0.75rem;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-  transition: transform 0.3s ease;
-}
-.module-item:hover {
-  transform: translateY(-5px);
-}
-.module-image {
-  width: 100%;
-  height: 100px;
-  object-fit: contain;
-  margin-bottom: 0.3rem;
-}
-.module-name {
-  font-size: 0.7rem;
-  font-weight: 600;
-  margin-bottom: 0.2rem;
-}
-.module-description {
-  font-size: 0.6rem;
-  opacity: 0.8;
-}
-@media (max-width: 768px) {
-  .education-title { font-size: 2rem; }
-  .module-item { width: 80px; height: 130px; }
-}
+  .item { padding: 1rem; margin: .5rem; border-radius: .5rem; }
 </style>
 
 {% schema %}
 {
-  "name": "Beauty Education",
-  "settings": [
-    { "type": "text", "id": "title", "label": "Title", "default": "Learn Beauty" },
-    { "type": "text", "id": "tagline", "label": "Tagline", "default": "Tips & Tutorials" },
-    { "type": "textarea", "id": "description", "label": "Description", "default": "Explore our educational content to master makeup techniques." },
-    { "type": "color", "id": "bg_color_start", "label": "Background Gradient Start", "default": "#1A1A3A" },
-    { "type": "color", "id": "bg_color_end", "label": "Background Gradient End", "default": "#2A2A5A" },
-    { "type": "color", "id": "title_color", "label": "Title Color", "default": "#F9F9F9" },
-    { "type": "color", "id": "text_color", "label": "Text Color", "default": "#E8E0D8" },
-    { "type": "checkbox", "id": "show_icon", "label": "Show education icon", "default": true },
-    { "type": "url", "id": "cta_link", "label": "CTA Link" },
-    { "type": "text", "id": "cta_text", "label": "CTA Text", "default": "Explore" }
-  ],
+  "name": "$name",
+  "settings": [],
   "blocks": [
     {
-      "type": "module",
-      "name": "Module",
+      "type": "item",
+      "name": "Item",
       "settings": [
-        { "type": "text", "id": "name", "label": "Module Name", "default": "Module 1" },
-        { "type": "textarea", "id": "description", "label": "Description", "default": "Brief description" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Item Title" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Description" },
         { "type": "color", "id": "color", "label": "Background Color", "default": "#FFFFFF" },
-        { "type": "image_picker", "id": "image", "label": "Module Image" }
+        { "type": "image_picker", "id": "image", "label": "Image" }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Default education",
+      "name": "Default $name",
       "category": "Featured",
       "blocks": [
-        { "type": "module", "settings": { "name": "Module 1", "description": "Intro", "color": "#FFF", "image": "" } },
-        { "type": "module", "settings": { "name": "Module 2", "description": "Advanced", "color": "#FFF", "image": "" } }
+        { "type": "item", "settings": { "title": "Item 1", "text": "Description", "color": "#FFF", "image": "" } },
+        { "type": "item", "settings": { "title": "Item 2", "text": "Description", "color": "#FFF", "image": "" } }
       ]
     }
   ]
