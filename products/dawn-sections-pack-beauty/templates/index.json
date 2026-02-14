@@ -1,13 +1,44 @@
 {
   "sections": {
-    "hero": {
-      "type": "beauty_accessories",
-      "settings": {}
-    },
-    "featured": {
-      "type": "featured-products",
-      "settings": {}
-    }
+    "beauty_accessories": {"type": "beauty_accessories", "settings": {}},
+    "beauty_accessories_brush_set": {"type": "beauty_accessories_brush_set", "settings": {}},
+    "beauty_accessories_cosmetic_bag": {"type": "beauty_accessories_cosmetic_bag", "settings": {}},
+    "beauty_accessories_perfume_bottle": {"type": "beauty_accessories_perfume_bottle", "settings": {}},
+    "beauty_education": {"type": "beauty_education", "settings": {}},
+    "beauty_gifts": {"type": "beauty_gifts", "settings": {}},
+    "beauty_makeup": {"type": "beauty_makeup", "settings": {}},
+    "beauty_makeup_eyeshadow": {"type": "beauty_makeup_eyeshadow", "settings": {}},
+    "beauty_makeup_foundation": {"type": "beauty_makeup_foundation", "settings": {}},
+    "beauty_makeup_lipstick": {"type": "beauty_makeup_lipstick", "settings": {}},
+    "beauty_makeup_mascara": {"type": "beauty_makeup_mascara", "settings": {}},
+    "beauty_skincare_cleanser": {"type": "beauty_skincare_cleanser", "settings": {}},
+    "beauty_skincare_moisturizer": {"type": "beauty_skincare_moisturizer", "settings": {}},
+    "beauty_skincare_serum": {"type": "beauty_skincare_serum", "settings": {}},
+    "beauty_skincare_toner": {"type": "beauty_skincare_toner", "settings": {}},
+    "featured-products": {"type": "featured-products", "settings": {}},
+    "perfume_fragrance_bodymist": {"type": "perfume_fragrance_bodymist", "settings": {}},
+    "perfume_fragrance_candle": {"type": "perfume_fragrance_candle", "settings": {}},
+    "perfume_fragrance_oil": {"type": "perfume_fragrance_oil", "settings": {}}
   },
-  "order": ["hero", "featured"]
+  "order": [
+    "beauty_accessories",
+    "beauty_accessories_brush_set",
+    "beauty_accessories_cosmetic_bag",
+    "beauty_accessories_perfume_bottle",
+    "beauty_education",
+    "beauty_gifts",
+    "beauty_makeup",
+    "beauty_makeup_eyeshadow",
+    "beauty_makeup_foundation",
+    "beauty_makeup_lipstick",
+    "beauty_makeup_mascara",
+    "beauty_skincare_cleanser",
+    "beauty_skincare_moisturizer",
+    "beauty_skincare_serum",
+    "beauty_skincare_toner",
+    "featured-products",
+    "perfume_fragrance_bodymist",
+    "perfume_fragrance_candle",
+    "perfume_fragrance_oil"
+  ]
 }

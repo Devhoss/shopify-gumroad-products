@@ -6,17 +6,17 @@
   .dawn-button {
     display: inline-block;
     padding: 0.75rem 1.5rem;
-    background: {{ settings.button_bg | default: '#D4AF37' }};
-    color: {{ settings.button_text_color | default: '#ffffff' }};
-    border: 2px solid {{ settings.button_border | default: '#D4AF37' }};
+    background: #D4AF37;
+    color: #ffffff;
+    border: 2px solid #D4AF37;
     border-radius: 4px;
     font-family: 'Playfair Display', serif;
     font-weight: 600;
     text-decoration: none;
-    transition: transform 0.2s, background 0.2s;
+    transition: transform 0.2s ease, background 0.2s ease;
   }
   .dawn-button:hover {
     transform: scale(1.05);
-    background: {{ settings.button_hover_bg | default: '#b8942c' }};
+    background: #b8942c;
   }
 </style>
