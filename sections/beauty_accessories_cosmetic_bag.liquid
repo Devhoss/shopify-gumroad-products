@@ -1,1 +1,178 @@
-}/beauty accessories cosmet}
+{% comment %}
+  Section: Beauty Accessories Cosmetic Bag
+  Description: Showcase a premium cosmetic bag with hero image, description, and feature blocks.
+{% endcomment %}
+
+<div class="dawn-cosmetic-bag-section" data-section-id="{{ section.id }}">
+  <div class="bag-hero" style="background: linear-gradient(135deg, {{ section.settings.bg_color_start }}, {{ section.settings.bg_color_end }});">
+    <div class="bag-content">
+      {% if section.settings.show_icon %}
+        <div class="bag-icon">{% render 'dawn-icon-bag' %}</div>
+      {% endif %}
+      <h2 class="bag-title">{{ section.settings.title }}</h2>
+      <p class="bag-tagline">{{ section.settings.tagline }}</p>
+
+      <div class="bag-showcase">
+        {% for block in section.blocks %}
+          <div class="bag-item" style="background: {{ block.settings.color }};">
+            {% if block.settings.image != blank %}
+              <img src="{{ block.settings.image | img_url: '300x300' }}" alt="{{ block.settings.name }}" class="bag-image">
+            {% endif %}
+            <h3 class="bag-name">{{ block.settings.name }}</h3>
+            <p class="bag-purpose">{{ block.settings.purpose }}</p>
+          </div>
+        {% endfor %}
+      </div>
+
+      <div class="bag-features">
+        {% for feature in section.settings.features %}
+          <div class="feature-item">
+            <span class="feature-icon">{{ feature.icon }}</span>
+            <span class="feature-text">{{ feature.text }}</span>
+          </div>
+        {% endfor %}
+      </div>
+
+      <p class="bag-description">{{ section.settings.description }}</p>
+      <a href="{{ section.settings.cta_link }}" class="dawn-button dawn-button-gold">{{ section.settings.cta_text }}</a>
+    </div>
+  </div>
+</div>
+
+<style>
+.dawn-cosmetic-bag-section {
+  position: relative;
+  overflow: hidden;
+}
+.bag-hero {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+}
+.bag-content {
+  max-width: 900px;
+  text-align: center;
+  color: {{ section.settings.text_color }};
+}
+.bag-icon {
+  margin-bottom: 1.5rem;
+}
+.bag-icon svg {
+  width: 48px;
+  height: 48px;
+  stroke: #D4AF37;
+}
+.bag-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: {{ section.settings.title_color }};
+}
+.bag-tagline {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+}
+.bag-showcase {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 2rem 0;
+  flex-wrap: wrap;
+}
+.bag-item {
+  width: 100px;
+  height: 160px;
+  border-radius: 12px;
+  padding: 0.75rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+}
+.bag-item:hover {
+  transform: translateY(-5px);
+}
+.bag-image {
+  width: 100%;
+  height: 100px;
+  object-fit: contain;
+  margin-bottom: 0.3rem;
+}
+.bag-name {
+  font-size: 0.7rem;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+.bag-purpose {
+  font-size: 0.6rem;
+  opacity: 0.8;
+}
+.bag-features {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 2rem 0;
+  flex-wrap: wrap;
+}
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+.feature-icon {
+  font-size: 1.2rem;
+}
+.bag-description {
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: 2rem 0;
+  opacity: 0.9;
+}
+@media (max-width: 768px) {
+  .bag-title { font-size: 2rem; }
+  .bag-item { width: 80px; height: 130px; }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Cosmetic Bag Collection",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "Luxury Cosmetic Bag" },
+    { "type": "text", "id": "tagline", "label": "Tagline", "default": "Elegant & Functional" },
+    { "type": "textarea", "id": "description", "label": "Description", "default": "A premium bag to keep your essentials organized with style." },
+    { "type": "color", "id": "bg_color_start", "label": "Background Gradient Start", "default": "#1A1A3A" },
+    { "type": "color", "id": "bg_color_end", "label": "Background Gradient End", "default": "#2A2A5A" },
+    { "type": "color", "id": "title_color", "label": "Title Color", "default": "#F9F9F9" },
+    { "type": "color", "id": "text_color", "label": "Text Color", "default": "#E8E0D8" },
+    { "type": "checkbox", "id": "show_icon", "label": "Show bag icon", "default": true },
+    { "type": "url", "id": "cta_link", "label": "CTA Link" },
+    { "type": "text", "id": "cta_text", "label": "CTA Text", "default": "Shop Now" }
+  ],
+  "blocks": [
+    {
+      "type": "bag",
+      "name": "Bag Item",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Bag Name", "default": "Bag 1" },
+        { "type": "text", "id": "purpose", "label": "Purpose", "default": "Travel" },
+        { "type": "color", "id": "color", "label": "Background Color", "default": "#FFFFFF" },
+        { "type": "image_picker", "id": "image", "label": "Bag Image" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default cosmetic bag",
+      "category": "Featured",
+      "blocks": [
+        { "type": "bag", "settings": { "name": "Bag 1", "purpose": "Travel", "color": "#FFF", "image": "" } },
+        { "type": "bag", "settings": { "name": "Bag 2", "purpose": "Daily", "color": "#FFF", "image": "" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
